@@ -11,53 +11,56 @@
  Here we declare a class by using the `'class'` keyword and then the name of the class. Within the braces we are free to add properties and new methods for class.
  */
 class ShapeClass {
-    var numberOfSides = 0
-    func description() -> String {
-        return "A shape with \(numberOfSides) sides."
-    }
+  var name = ""
+  var numberOfSides = 0
+  func description() -> String {
+    return "A \(name) shape with \(numberOfSides) sides."
+  }
 }
 /*:
  The struct version looks the same except we use the keyword `'struct'`.
  */
 struct ShapeStruct {
-    var numberOfSides = 0
-    func description() -> String {
-        return "A shape with \(numberOfSides) sides."
-    }
+  var numberOfSides = 0
+  func description() -> String {
+    return "A shape with \(numberOfSides) sides."
+  }
 }
-
 /*:
  - Experiment:
  Update the ShapeClass and add a new property 'name'. Also, update the description method to include the name when it prints.
  */
-
 
 /*:
  - Experiment:
  Try creating an instance of the ShapeClass. We can do this by writing the class name then putting parentheses '()' after the class name. Assign it to a declared variable and try setting the variables 'numberofSides' and 'name' and calling the 'description' method.
  */
 
+var square = ShapeClass()
+square.name = "square"
+square.numberOfSides = 4
+square.description()
 
 /*:
  Our ShapeClass is looking good but it is missing something important. We need an initializer to set up the class when an instance is created. We are going to create another class very similar to ShapeClass but this time, we will add the initializer.
  */
 
 class NamedShapeClass {
-    var numberOfSides: Int = 0
-    var name: String
-    
-    init(name: String) {
-        self.name = name
-    }
-    
-    init(name: String, sides: Int) {
-        self.name = name
-        self.numberOfSides = sides
-    }
-    
-    func description() -> String {
-        return "A shape with \(numberOfSides) sides."
-    }
+  var numberOfSides: Int = 0
+  var name: String
+  
+  init(name: String) {
+    self.name = name
+  }
+  
+  init(name: String, sides: Int) {
+    self.name = name
+    self.numberOfSides = sides
+  }
+  
+  func description() -> String {
+    return "A shape with \(numberOfSides) sides."
+  }
 }
 
 /*:
@@ -65,6 +68,8 @@ class NamedShapeClass {
  Add another initializer to our 'NamedShapeClass'. Have this initializer take in 'name' and 'numberOfSides' as its parameters. Then test it out by creating an instance of 'NamedShapeClass'.
  */
 
+var triangle = NamedShapeClass(name: "triangle", sides: 3)
+triangle.description()
 
 /*:
  - Callout(Challenge):
@@ -77,8 +82,25 @@ class NamedShapeClass {
  */
 
 class Square : NamedShapeClass {
-    
+  var sideLength : Int
+  
+  init(name: String, sideLength: Int) {
+    self.sideLength = sideLength
+    super.init(name: name, sides: 4)
+  }
+  
+  func area() -> Int {
+    return self.sideLength * self.sideLength
+  }
+  
+  override func description() -> String {
+    return "A square with \(self.numberOfSides) sides of length \(self.sideLength)"
+  }
 }
+
+var mySquare = Square(name: "square", sideLength: 5)
+mySquare.area()
+mySquare.description()
 
 /*:
  - Callout(Challenge):
@@ -88,7 +110,7 @@ class Square : NamedShapeClass {
  - Create a function called drive. Inside the function include a print statement that prints the model of the car you are driving.
  - Create a custom initalizer that requires an `String model` as an input.
  - Subclass Car and make a Toyota Class. `Override init()` and set the model to "Prius" inside the method.
-
+ 
  To Test:
  - Add an instance of a Car called nissan. Initialize it with model named "Rogue"
  - Add the drive() method to make sure it prints out "Rogue"
@@ -96,18 +118,47 @@ class Square : NamedShapeClass {
  - Add the drive() method to make sure it prints out "Prius"
  */
 
+class Car {
+  var model : String
+  
+  init(model: String) {
+    self.model = model
+  }
+  
+  func drive() {
+    print(self.model)
+  }
+}
 
+class Toyota : Car {
+  init() {
+    super.init(model: "Prius")
+  }
+}
+
+let nissan = Car(model: "Rogue")
+nissan.drive()
+
+let toyota = Toyota()
+toyota.drive()
 
 /*:
  - Callout(Challenge):
  Earlier, we mentioned that classes are passed by reference and structs are passed by value. Let's try to clarify this with an example.
  \
-First, create a Person class with a name property and a custom initializer that takes a name as its parameter, then uncomment 'Section A'. What do think will happen? What are the results?
-\
-Now create the same Person class but convert it to a struct. Uncomment 'Section B'. What do think will happen? What are the results?
-*/
+ First, create a Person class with a name property and a custom initializer that takes a name as its parameter, then uncomment 'Section A'. What do think will happen? What are the results?
+ \
+ Now create the same Person class but convert it to a struct. Uncomment 'Section B'. What do think will happen? What are the results?
+ */
 // Implement Person class under here!
 
+//class Person {
+//  var name : String
+//
+//  init(name: String) {
+//    self.name = name
+//  }
+//}
 
 // Section A
 //var firstPersonObject = Person(name: "Joe")
@@ -120,14 +171,21 @@ Now create the same Person class but convert it to a struct. Uncomment 'Section 
 
 // Implement Person struct under here!
 
+struct Person {
+  var name : String
+  
+  init(name: String) {
+    self.name = name
+  }
+}
 
 // Section B
-//var firstPersonStruct = Person(name: "Joe")
-//var secondPersonStruct = firstPersonStruct
-//secondPersonStruct.name = "Jane"
-//
-//print(firstPersonStruct.name)
-//print(secondPersonStruct.name)
+var firstPersonStruct = Person(name: "Joe")
+var secondPersonStruct = firstPersonStruct
+secondPersonStruct.name = "Jane"
+
+print(firstPersonStruct.name)
+print(secondPersonStruct.name)
 
 
 //: [Next](@next)

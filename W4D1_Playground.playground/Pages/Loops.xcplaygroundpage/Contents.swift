@@ -13,7 +13,7 @@ let pets = ["dog", "cat", "pig", "parrot"]
 
 // This is the for loop grabbing each item and performing actions
 for pet in pets {
-    print(pet)
+  print(pet)
 }
 
 /*:
@@ -22,7 +22,7 @@ for pet in pets {
  */
 
 for i in 2...5 {
-    print("My Current Index: \(i)")
+  print("My Current Index: \(i)")
 }
 
 /*:
@@ -30,18 +30,30 @@ for i in 2...5 {
  What's the difference between `2...5` vs `2..<5`?
  */
 
+for i in 2..<5 {
+  print("My Current Index: \(i)")
+}
 
 /*:
  - Experiment:
-  Use a ranged for loop to search through the 'pets' array above for the word 'pig' and print out its index.
+ Use a ranged for loop to search through the 'pets' array above for the word 'pig' and print out its index.
  */
 
+for i in 0..<pets.count {
+  if pets[i] == "pig" {
+    print("pig idex = \(i)")
+  }
+}
 
 /*:
  - Experiment:
  Create an array of random numbers of your choosing then make a for loop that adds 1 to each number.
  */
 
+var randomNumz = [1, 23, 5, 34, 64, 123, 65]
+for i in 0..<randomNumz.count {
+  randomNumz[i] += 1
+}
 
 /*:
  - Experiment:
@@ -53,27 +65,38 @@ for i in 2...5 {
  */
 
 let interestingNumbers = [
-    "Prime": [2, 3, 5, 7, 11, 13],
-    "Fibonacci": [1, 1, 2, 3, 5, 8],
-    "Square": [1, 4, 9, 16, 25],
+  "Prime": [2, 3, 5, 7, 11, 13],
+  "Fibonacci": [1, 1, 2, 3, 5, 8],
+  "Square": [1, 4, 9, 16, 25],
 ]
 var largest = 0
+var smallest = 999
 for (_, numbers) in interestingNumbers {
-    for number in numbers {
-        if number > largest {
-            largest = number
-        }
+  for number in numbers {
+    if number > largest {
+      largest = number
     }
+    if number < smallest {
+      smallest = number
+    }
+  }
 }
 print(largest)
-
-
+print(smallest)
 /*:
  - Callout(Challenge):
  Given a number `N`, from 0 to `N`, add up all the odd numbers and print out the result.
  ie: N = 5, 1+3+5 = 9
  */
 
+let N = 26
+var sum = 0
+for i in 0...N {
+  if i % 2 != 0 {
+    sum += i
+  }
+}
+print(sum)
 
 /*:
  - Callout(Challenge):
@@ -89,5 +112,19 @@ print(largest)
  */
 
 let numberArray = [1, 4, 5, 5, 5, 3, 2, 1, 4, 2, 2, 2, 1]
+var occurances : [Int : Int] = [:]
+
+for n in numberArray {
+  if occurances[n] == nil {
+    occurances[n] = 1
+  }
+  else {
+    occurances[n]! += 1
+  }
+}
+
+for (i, j) in occurances {
+  print("\(i): Occurs \(j) times")
+}
 
 //: [Next](@next)

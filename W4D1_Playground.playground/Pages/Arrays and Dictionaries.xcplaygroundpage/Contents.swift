@@ -20,18 +20,25 @@ myDictionary["Principal"] = 1
  Try creating an array and dictionary using `'let'` vs `'var'` then try adding something to them. What do you notice? For the array, you can use a method called 'append' to add something to it.
  */
 
-
+var greetingsArray = ["Hey", "Sup", "Howdy"]
+greetingsArray.append("Bonjour")
+var numberDictionary = ["One": 1, "Two" : 2, "Three" : 3]
+numberDictionary["Four"] = 4
 /*:
  - Experiment:
  Try creating an empty array with an explicit type `[type]`. What happens when you add a value that isn't the same type?
  */
 
+var wordArray : [String] = []
+//wordArray.append(2)
 
 /*:
  - Experiment:
  Try creating an empty dictionary with an explicit type. `[keyType: valueType]`
  */
 
+var populationDictionary : [String : Int] = [:]
+populationDictionary["Canada"] = 37000000
 
 /*:
  - Experiment:
@@ -44,6 +51,16 @@ myDictionary["Principal"] = 1
  - count
  */
 
+var valuesArray = [1.2, 43.23, 3523.0, 1.55424, 2.2]
+valuesArray.append(423.22)
+valuesArray.count
+valuesArray.insert(0.0, at: 0)
+valuesArray.count
+valuesArray.remove(at: 3)
+valuesArray.count
+valuesArray.reverse()
+valuesArray.removeAll()
+valuesArray.count
 
 /*:
  - Experiment:
@@ -53,6 +70,12 @@ myDictionary["Principal"] = 1
  - count
  */
 
+var ageDictionary = ["Bob" : 58, "Natalie" : 32, "Nance" : 18]
+ageDictionary.removeValue(forKey: "NANCE")
+ageDictionary.removeValue(forKey: "Bob")
+ageDictionary
+ageDictionary.isEmpty
+ageDictionary.count
 
 /*:
  - Callout(Challenge):
@@ -61,6 +84,11 @@ myDictionary["Principal"] = 1
     Finally, print out each person's name from the array using their index and string interpolation
 */
 
+var stringArray : [String] = []
+stringArray.append("John")
+stringArray.append("Karen")
+stringArray.append("Jane")
+print("Names: \(stringArray[0]), \(stringArray[1]), \(stringArray[2])")
 
 /*:
  - Callout(Challenge):
@@ -75,5 +103,7 @@ myDictionary["Principal"] = 1
     On the next line, add this last person's info: Bob - $45000
  */
 
+var salaries = ["John" : 50000, "Jane" : 70000, "Karen" : 62000]
+salaries["Bob"] = 45000
 
 //: [Next](@next)
